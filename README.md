@@ -75,6 +75,7 @@ python main.py
 
 - Ensure that the cookies are properly saved in the `.pkl` files for seamless login.
 - The script uses the `fake_useragent` library to generate random user agents to avoid detection.
+- However it is recommended that one uses their own user agent in (`tiktok_upload.py`) as for the platform's anti-automation
 - The `undetected_chromedriver` library is used to bypass anti-bot mechanisms.
 - For Snapchat, the AutoIt script is used to handle the file upload dialog. Ensure AutoIt is installed and configured.
 
