@@ -30,14 +30,14 @@ This project automates the process of uploading videos to Instagram, TikTok, You
         instagram_cookies_file = "instagram_cookies.pkl"
         tiktok_cookies_file = "tiktok_cookies.pkl"
         youtube_cookies_file = "youtube_cookies.pkl"
-        snapchat_username = "ur snap username"
-        snapchat_password = "ur snap password"
-        instagram_username = "ur insta username"
-        instagram_password = "ur insta password"
-        tiktok_username = "ur tiktok username"
-        tiktok_password = "ur tiktok password"
-        youtube_email = "ur yt email"
-        youtube_password = "ur yt password"
+        snapchat_username = "ur_snap_username"
+        snapchat_password = "ur_snap_password"
+        instagram_username = "ur_insta_username"
+        instagram_password = "ur_insta_username"
+        tiktok_username = "ur_tiktok_username"
+        tiktok_password = "ur_tiktok_username"
+        youtube_email = "ur_yt_email"
+        youtube_password = "ur_yt_username"
     ```
 
 2. **Cookie Extraction**: Run the script to login and save cookies for each platform. This will generate the required cookie files (`.pkl`):
