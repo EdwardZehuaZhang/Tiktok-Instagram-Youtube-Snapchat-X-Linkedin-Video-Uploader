@@ -13,6 +13,11 @@ from config import Config
 def random_sleep(min_sec, max_sec):
     time.sleep(random.uniform(min_sec, max_sec))
 
+def spoof_navigator(driver):
+    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+    driver.execute_script("Object.defineProperty(navigator, 'plugins', {get: () => [1, 2, 3]})")
+    driver.execute_script("Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en']})")
+
 def remove_non_bmp_characters(text):
     return ''.join(c for c in text if ord(c) <= 0xFFFF)
 
@@ -23,6 +28,7 @@ def read_description(file_path):
 
 def load_cookies(driver, cookies_file):
     driver.get("https://www.instagram.com/")
+    spoof_navigator(driver)
     with open(cookies_file, 'rb') as file:
         cookies = pickle.load(file)
         for cookie in cookies:

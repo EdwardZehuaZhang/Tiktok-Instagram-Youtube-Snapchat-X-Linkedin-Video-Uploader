@@ -13,10 +13,17 @@ from config import Config
 def random_sleep(min_sec, max_sec):
     time.sleep(random.uniform(min_sec, max_sec))
 
+def spoof_navigator(driver):
+    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+    driver.execute_script("Object.defineProperty(navigator, 'plugins', {get: () => [1, 2, 3]})")
+    driver.execute_script("Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en']})")
+
 def login_to_instagram_and_save_cookies(driver, username, password, cookies_file):
     driver.get("https://www.instagram.com/")
     random_sleep(3, 6)
     
+    spoof_navigator(driver)
+
     username_input = driver.find_element(By.NAME, 'username')
     password_input = driver.find_element(By.NAME, 'password')
     
@@ -35,6 +42,8 @@ def login_to_tiktok_and_save_cookies(driver, username, password, cookies_file):
     driver.get("https://www.tiktok.com/login/phone-or-email/email")
     random_sleep(3, 6)
     
+    spoof_navigator(driver)
+
     username_input = driver.find_element(By.NAME, 'username')
     password_input = driver.find_element(By.XPATH, "//input[@type='password']")
     
@@ -53,6 +62,9 @@ def login_to_tiktok_and_save_cookies(driver, username, password, cookies_file):
 
 def login_to_youtube_and_save_cookies(driver, email, password, cookies_file):
     driver.get("https://www.youtube.com/")
+
+    spoof_navigator(driver)
+
     random_sleep(3, 6)
     
     sign_in_button = driver.find_element(By.XPATH, '//*[@aria-label="Sign in"]')

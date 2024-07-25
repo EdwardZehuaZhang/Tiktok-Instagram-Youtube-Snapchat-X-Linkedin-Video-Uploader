@@ -16,12 +16,18 @@ from config import Config
 def random_sleep(min_sec, max_sec):
     time.sleep(random.uniform(min_sec, max_sec))
 
+def spoof_navigator(driver):
+    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+    driver.execute_script("Object.defineProperty(navigator, 'plugins', {get: () => [1, 2, 3]})")
+    driver.execute_script("Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en']})")
+
 def read_description(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         return file.read()
 
 def load_cookies(driver, cookies_file):
     driver.get("https://www.tiktok.com/login")
+    spoof_navigator(driver)
     with open(cookies_file, 'rb') as file:
         cookies = pickle.load(file)
         for cookie in cookies:
@@ -30,6 +36,7 @@ def load_cookies(driver, cookies_file):
 
 def upload_video(driver, video_path, description):    
     driver.get("https://www.tiktok.com/tiktokstudio/upload?from=creator_center")
+    spoof_navigator(driver)
 
     try:
         iframe = WebDriverWait(driver, 10).until(

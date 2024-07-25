@@ -12,6 +12,12 @@ def read_description(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         return file.readline().strip()
 
+def spoof_navigator(driver):
+    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+    driver.execute_script("Object.defineProperty(navigator, 'plugins', {get: () => [1, 2, 3]})")
+    driver.execute_script("Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en']})")
+
+
 def upload_video(video_path, description_file_path):
     description = read_description(description_file_path)  
     
@@ -22,6 +28,7 @@ def upload_video(video_path, description_file_path):
         driver = uc.Chrome(options=options)
         
         driver.get('https://my.snapchat.com/')
+        spoof_navigator(driver)
 
         sign_in_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Sign in')]"))
