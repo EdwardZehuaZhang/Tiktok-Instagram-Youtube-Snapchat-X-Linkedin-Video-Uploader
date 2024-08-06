@@ -1,4 +1,4 @@
-# Tiktok Instagram Youtube Snapchat Python Video Uploader
+# One Click Tiktok Insta YT Snap Video Uploader
 
 This project automates the process of uploading videos to Instagram, TikTok, YouTube, and Snapchat using Python and Selenium. 
 
