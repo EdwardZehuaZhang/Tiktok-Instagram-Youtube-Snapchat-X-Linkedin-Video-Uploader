@@ -1,6 +1,6 @@
-# Tiktok Instagram Youtube Snapchat Video Uploader
+# Tiktok Instagram Youtube Snapchat X Video Uploader
 
-This project automates the process of uploading videos to Instagram, TikTok, YouTube, and Snapchat using Python and Selenium. 
+This project automates the process of uploading videos to Instagram, TikTok, YouTube, Snapchat and X using Python and Selenium. 
 
 ## Prerequisites
 
@@ -38,6 +38,8 @@ This project automates the process of uploading videos to Instagram, TikTok, You
         tiktok_password = "ur_tiktok_username"
         youtube_email = "ur_yt_email"
         youtube_password = "ur_yt_username"
+        x_email = "ur_x_email"
+        x_password = "ur_x_password"
     ```
 
 2. **Cookie Extraction**: Run the script to login and save cookies for each platform. This will generate the required cookie files (`.pkl`):

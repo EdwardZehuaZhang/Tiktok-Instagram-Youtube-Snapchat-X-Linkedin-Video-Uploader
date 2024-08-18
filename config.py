@@ -12,3 +12,5 @@ class Config:
     tiktok_password = "ur_tiktok_username"
     youtube_email = "ur_yt_email"
     youtube_password = "ur_yt_username"
+    x_email = "ur_x_email"
+    x_password = "ur_x_password"
