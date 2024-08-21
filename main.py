@@ -5,6 +5,8 @@ from instagram_upload import main as instagram_upload
 from snapchat_upload import main as snapchat_upload
 from tiktok_upload import main as tiktok_upload
 from youtube_upload import main as youtube_upload
+from x_upload import main as x_upload
+from linkedin_upload import main as linkedin_upload
 from config import Config
 
 def upload_with_retry(upload_func, *args, max_retries=3):
@@ -40,7 +42,12 @@ def main():
     if not upload_with_retry(youtube_upload, video_path, description_file_path, Config.youtube_cookies_file):
         failed_uploads.append(("YouTube", youtube_upload, video_path, description_file_path, Config.youtube_cookies_file))
 
-    # Retry failed uploads
+    if not upload_with_retry(x_upload, video_path, description_file_path, Config.x_cookies_file):
+        failed_uploads.append(("X", x_upload, video_path, description_file_path, Config.x_cookies_file))
+
+    if not upload_with_retry(linkedin_upload, video_path, description_file_path, Config.linkedin_cookies_file):
+        failed_uploads.append(("Linkedin", linkedin_upload, video_path, description_file_path, Config.linkedin_cookies_file))
+
     while failed_uploads:
         platform, func, *args = failed_uploads.pop(0)
         print(f"Retrying {platform} upload...")

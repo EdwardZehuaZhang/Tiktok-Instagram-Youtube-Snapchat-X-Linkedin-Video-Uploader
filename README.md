@@ -1,6 +1,6 @@
-# Tiktok Instagram Youtube Snapchat X Video Uploader (Douyin Kuaishou Bilbili Comming Soon)
+# Tiktok Instagram Youtube Snapchat X Linkedin Video Uploader (Douyin Kuaishou Bilbili Comming Soon)
 
-This project automates the process of uploading videos to Instagram, TikTok, YouTube, Snapchat and X using Python and Selenium. 
+This project automates the process of uploading videos to Instagram, TikTok, YouTube, Snapchat, X and Linkedin using Python and Selenium. 
 
 ## Prerequisites
 
@@ -30,16 +30,13 @@ This project automates the process of uploading videos to Instagram, TikTok, You
         instagram_cookies_file = "instagram_cookies.pkl"
         tiktok_cookies_file = "tiktok_cookies.pkl"
         youtube_cookies_file = "youtube_cookies.pkl"
+        x_cookies_file = "x_cookies.pkl"
+        linkedin_cookies_file = "linkedin_cookies.pkl"
         snapchat_username = "ur_snap_username"
         snapchat_password = "ur_snap_password"
         instagram_username = "ur_insta_username"
         instagram_password = "ur_insta_username"
-        tiktok_username = "ur_tiktok_username"
-        tiktok_password = "ur_tiktok_username"
-        youtube_email = "ur_yt_email"
-        youtube_password = "ur_yt_username"
-        x_email = "ur_x_email"
-        x_password = "ur_x_password"
+        ......
     ```
 
 2. **Cookie Extraction**: Run the script to login and save cookies for each platform. This will generate the required cookie files (`.pkl`):
