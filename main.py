@@ -21,6 +21,35 @@ def upload_with_retry(upload_func, *args, max_retries=3):
     print(f"{upload_func.__name__} failed after {max_retries} attempts")
     return False
 
+def get_user_choices():
+    platforms = {
+        "1": ("Instagram", instagram_upload, Config.instagram_cookies_file),
+        "2": ("TikTok", tiktok_upload, Config.tiktok_cookies_file),
+        "3": ("YouTube", youtube_upload, Config.youtube_cookies_file),
+        "4": ("X", x_upload, Config.x_cookies_file),
+        "5": ("Snapchat", snapchat_upload, None),
+        "6": ("Linkedin", linkedin_upload, Config.linkedin_cookies_file)
+    }
+    
+    print("Which platforms do you want to upload to? Enter the corresponding number(s):")
+    print("ENTER: All")
+    print("1: Instagram")
+    print("2: TikTok")
+    print("3: YouTube")
+    print("4: X")
+    print("5: Snapchat")
+    print("6: Linkedin")
+    print("Example: '1 2' to select Instagram and TikTok")
+    
+    choices = input("Enter your choices: ")
+    
+    selected_platforms = [platforms[choice] for choice in choices if choice in platforms]
+    
+    if not selected_platforms:
+        return list(platforms.values())  
+    
+    return selected_platforms
+
 def main():
     script_dir = os.path.dirname(os.path.realpath(__file__))
     os.chdir(script_dir)
@@ -28,31 +57,18 @@ def main():
     video_path = Config.video_path
     description_file_path = Config.description_file_path
 
+    selected_platforms = get_user_choices()
     failed_uploads = []
 
-    if not upload_with_retry(instagram_upload, video_path, description_file_path, Config.instagram_cookies_file):
-        failed_uploads.append(("Instagram", instagram_upload, video_path, description_file_path, Config.instagram_cookies_file))
-
-    if not upload_with_retry(snapchat_upload, video_path, description_file_path):
-        failed_uploads.append(("Snapchat", snapchat_upload, video_path, description_file_path))
-
-    if not upload_with_retry(tiktok_upload, video_path, description_file_path, Config.tiktok_cookies_file):
-        failed_uploads.append(("TikTok", tiktok_upload, video_path, description_file_path, Config.tiktok_cookies_file))
-
-    if not upload_with_retry(youtube_upload, video_path, description_file_path, Config.youtube_cookies_file):
-        failed_uploads.append(("YouTube", youtube_upload, video_path, description_file_path, Config.youtube_cookies_file))
-
-    if not upload_with_retry(x_upload, video_path, description_file_path, Config.x_cookies_file):
-        failed_uploads.append(("X", x_upload, video_path, description_file_path, Config.x_cookies_file))
-
-    if not upload_with_retry(linkedin_upload, video_path, description_file_path, Config.linkedin_cookies_file):
-        failed_uploads.append(("Linkedin", linkedin_upload, video_path, description_file_path, Config.linkedin_cookies_file))
+    for platform_name, upload_func, cookies_file in selected_platforms:
+        if not upload_with_retry(upload_func, video_path, description_file_path, cookies_file):
+            failed_uploads.append((platform_name, upload_func, video_path, description_file_path, cookies_file))
 
     while failed_uploads:
-        platform, func, *args = failed_uploads.pop(0)
-        print(f"Retrying {platform} upload...")
+        platform_name, func, *args = failed_uploads.pop(0)
+        print(f"Retrying {platform_name} upload...")
         if not upload_with_retry(func, *args):
-            failed_uploads.append((platform, func, *args))  
+            failed_uploads.append((platform_name, func, *args))
 
 if __name__ == "__main__":
     main()
