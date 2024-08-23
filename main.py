@@ -39,7 +39,7 @@ def get_user_choices():
     print("4: X")
     print("5: Snapchat")
     print("6: Linkedin")
-    print("Example: '1 2' to select Instagram and TikTok")
+    print("Example: '12' to select Instagram and TikTok")
     
     choices = input("Enter your choices: ")
     
