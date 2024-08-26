@@ -26,8 +26,8 @@ def get_user_choices():
         "1": ("Instagram", instagram_upload, Config.instagram_cookies_file),
         "2": ("TikTok", tiktok_upload, Config.tiktok_cookies_file),
         "3": ("YouTube", youtube_upload, Config.youtube_cookies_file),
-        "4": ("X", x_upload, Config.x_cookies_file),
-        "5": ("Snapchat", snapchat_upload, None),
+        "4": ("Snapchat", snapchat_upload, None),
+        "5": ("X", x_upload, Config.x_cookies_file),
         "6": ("Linkedin", linkedin_upload, Config.linkedin_cookies_file)
     }
     
@@ -36,8 +36,8 @@ def get_user_choices():
     print("1: Instagram")
     print("2: TikTok")
     print("3: YouTube")
-    print("4: X")
-    print("5: Snapchat")
+    print("4: Snapchat")
+    print("5: X")
     print("6: Linkedin")
     print("Example: '12' to select Instagram and TikTok")
     

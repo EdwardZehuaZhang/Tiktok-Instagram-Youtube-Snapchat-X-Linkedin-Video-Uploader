@@ -19,7 +19,7 @@ def spoof_navigator(driver):
 
 def upload_video(driver, video_path, description_file_path, description=None):
     if not description:
-        description = read_description(description_file_path)  # Read description inside the function
+        description = read_description(description_file_path)  
     
     try:
         driver.get('https://my.snapchat.com/')
@@ -75,15 +75,16 @@ def upload_video(driver, video_path, description_file_path, description=None):
         )
         post_final_button.click()
 
-        # Wait for the success message
         WebDriverWait(driver, 120).until(
             EC.presence_of_element_located((By.XPATH, "//div[text()='Yay! Your post is now live!']"))
         )
         print("Upload success message detected. Closing the browser.")
 
+        time.sleep(2)
+
     except Exception as e:
         print(f"An error occurred: {e}")
-        raise  # Re-raise the exception to propagate it to the caller
+        raise  
 
     finally:
         driver.quit()
