@@ -4,20 +4,26 @@ This project automates the process of uploading videos to Instagram, TikTok, You
 
 ## Prerequisites
 
-1. **Python**: Make sure you have Python installed. You can download it from [here](https://www.python.org/downloads/).
-2. **AutoIt**: For interacting with certain elements on Windows, AutoIt is required. You can download it from [here](https://www.autoitscript.com/site/autoit/downloads/).
+**Python**: Make sure you have Python installed. You can download it from [here](https://www.python.org/downloads/).
 
 ## Installation
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/video-uploader.git
-    cd video-uploader
+    git clone https://github.com/EdwardZehuaZhang/Tiktok-Instagram-Youtube-Snapchat-X-Linkedin-Video-Uploader.git
     ```
 
 2. Install the required Python packages:
     ```bash
-    pip install -r requirements.txt
+    pip install pickle
+    pip install random
+    pip install time
+    pip install fake_useragent 
+    pip install undetected_chromedriver
+    pip install selenium
+    pip install pywinauto
+    pip install os
+    pip install sys
     ```
 
 ## Configuration
@@ -72,28 +78,6 @@ python main.py
 
 ## Important Points
 
+- The script uses the `fake_useragent` library to generate random user agents to avoid detection. However it is recommended that one uses their own user agent in (`tiktok_upload.py`) as for anti-automation
 - Ensure that the cookies are properly saved in the `.pkl` files for seamless login.
-- The script uses the `fake_useragent` library to generate random user agents to avoid detection.
-- However it is recommended that one uses their own user agent in (`tiktok_upload.py`) as for anti-automation
 - The `undetected_chromedriver` library is used to bypass anti-bot mechanisms.
-- For Snapchat, the AutoIt script is used to handle the file upload dialog. Ensure AutoIt is installed and configured.
-
-## AutoIt Script
-
-AutoIt script (`upload_video.au3`) is required for Snapchat file uploads. The script will be automatically executed when needed.
-
-```autoit
-; Wait for the Open dialog to become active
-WinWaitActive("Open")
-
-; Focus the edit control where the file path is to be entered
-ControlFocus("Open", "", "Edit1")
-
-; Set the file path in the edit control
-ControlSetText("Open", "", "Edit1", "D:\\Your Path\\Your Path\\Your Path.mp4")
-
-; Click the Open button to confirm the selection
-ControlClick("Open", "", "Button1")
-```
-
-With this, you should be able to use the script to upload videos to multiple platforms efficiently.
