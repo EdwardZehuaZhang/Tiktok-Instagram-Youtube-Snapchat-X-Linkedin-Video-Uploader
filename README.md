@@ -15,15 +15,7 @@ This project automates the process of uploading videos to Instagram, TikTok, You
 
 2. Install the required Python packages:
     ```bash
-    pip install pickle
-    pip install random
-    pip install time
-    pip install fake_useragent 
-    pip install undetected_chromedriver
-    pip install selenium
-    pip install pywinauto
-    pip install os
-    pip install sys
+    pip install fake_useragent undetected_chromedriver selenium pywinauto
     ```
 
 ## Configuration
