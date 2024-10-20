@@ -23,8 +23,11 @@ def remove_non_bmp_characters(text):
 
 def read_description(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
-        text = file.read()
-    return remove_non_bmp_characters(text)
+        content = file.read().strip().split('\n\n')
+        title = content[0]  
+        description = content[1] if len(content) > 1 else ""  
+        tags = '# ' + ' '.join(content[2].split()) if len(content) > 2 else ""  
+        return title, description, tags
 
 def load_cookies(driver, cookies_file):
     driver.get("https://www.instagram.com/")
@@ -44,7 +47,7 @@ def dismiss_notifications_popup(driver):
     except Exception as e:
         print("No 'Turn on Notifications' popup appeared or click failed:", e)
 
-def upload_video(driver, video_path, description):
+def upload_video(driver, video_path, description, title, tags):
     dismiss_notifications_popup(driver)
     try:
         create_button = WebDriverWait(driver, 20).until(
@@ -91,16 +94,18 @@ def upload_video(driver, video_path, description):
         )
         next_button.click()
 
+        time.sleep(1)
+
         next_button = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, "//*[name()='div' and text()='Next']"))
         )
         next_button.click()
-        time.sleep(1)
+
         description_input = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, "//*[name()='div' and @aria-label='Write a caption...']"))
         )
-        description_input.send_keys(description)
-        time.sleep(1)
+        description_input.send_keys(title + "\n\n" + description + "\n\n" + tags)
+
         share_button = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, "//*[name()='div' and text()='Share']"))
         )
@@ -126,17 +131,17 @@ def upload_video(driver, video_path, description):
         print("Failed to detect upload success message:", e)
 
 def main(video_path, description_file_path, cookies_file):
-    description = read_description(description_file_path)
+    title, description, tags = read_description(description_file_path)
     options = uc.ChromeOptions()
     ua = UserAgent()
-    options.add_argument(str(ua.random))
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
     driver = uc.Chrome(options=options)
 
     try:
         load_cookies(driver, cookies_file)
-        upload_video(driver, video_path, description)
+        upload_video(driver, video_path, description, title, tags)
     finally:
         driver.quit()
 
 if __name__ == "__main__":
-    main(Config.video_path, Config.description_file_path, Config.tiktok_cookies_file)
+    main(Config.video_path, Config.description_file_path, Config.instagram_cookies_file)
