@@ -134,7 +134,7 @@ def main(video_path, description_file_path, cookies_file):
     title, description, tags = read_description(description_file_path)
     options = uc.ChromeOptions()
     ua = UserAgent()
-    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+    options.add_argument("user-agent=")
     driver = uc.Chrome(options=options)
 
     try:

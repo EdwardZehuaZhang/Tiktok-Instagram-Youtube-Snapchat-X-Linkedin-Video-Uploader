@@ -120,7 +120,7 @@ def main(video_path, description_file_path, cookies_file):
     description = read_description(description_file_path)
     options = uc.ChromeOptions()
     #note that you should replace this string with ur own useragent caz tiktok have good detection
-    options.add_argument("Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1")
+    options.add_argument("user-agent=")
     driver = uc.Chrome(options=options)
 
     try:
